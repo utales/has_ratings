@@ -52,14 +52,15 @@ module SimplesIdeias
         
           self.has_rating_options = {
             :type => ::ActiveRecord::Base.send(:class_name_of_active_record_descendant, self).to_s
+            # :type => ::ActiveRecord::Base.send(:class_of_active_record_descendant, self).name
           }
         
           # associations
           has_many :ratings, :as => :rateable, :dependent => :destroy
         
           # named scopes
-          named_scope :best_rated, :order => 'rating desc'
-          named_scope :most_rated, :order => 'ratings_count desc'
+          scope :best_rated, :order => 'rating desc'
+          scope :most_rated, :order => 'ratings_count desc'
         end
       end
     
